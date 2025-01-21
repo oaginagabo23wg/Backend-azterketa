@@ -1,5 +1,6 @@
+@url = http://localhost:8000
 ### POST user register
-POST http://127.0.0.1:8000/api/register
+POST {{url}}/api/register
 Accept: application/json
 Content-Type: application/json
 
@@ -12,7 +13,7 @@ Content-Type: application/json
 }
 
 ### POST user register
-POST http://127.0.0.1:8000/api/register
+POST {{url}}/api/register
 Accept: application/json
 Content-Type: application/json
 
@@ -26,8 +27,8 @@ Content-Type: application/json
 }
 
 
-### POST user login
-POST http://127.0.0.1:8000/api/login
+### POST user login ikaslea
+POST {{url}}/api/login
 Accept: application/json
 Content-Type: application/json
 
@@ -36,21 +37,59 @@ Content-Type: application/json
     "password" : "pasahitza"
 }
 
+### POST user login irakaslea
+POST {{url}}/api/login
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email" : "Oihan@gmail.com",
+    "password" : "pasahitza123"
+}
+
 ### POST user logout
-POST http://127.0.0.1:8000/api/logout
+POST {{url}}/api/logout
 Authorization: Bearer 9|nCybrfozjXYuS2d9sqQ5SJCHSOhsctvRsc0XcYaO90767b32
 Accept: application/json
 
 ### GET moduluak index
-GET http://127.0.0.1:8000/api/moduluak
+GET {{url}}/api/moduluak
 
 ### POST moduluak store
-POST http://127.0.0.1:8000/api/moduluak
+POST {{url}}/api/moduluak
 Accept: application/json
 Content-Type: application/json
-Authorization: Bearer 10|TJdvG47xDZ3ce9hge5mdAcuHaMZ1k2I3CwecxUnt1ae0a89b
+
+{
+    "izena" : "Gaztelera",
+    "gela" : "2003-01-01"
+}
+
+### PUT moduluak update
+PUT {{url}}/api/moduluak/1
+Accept: application/json
+Content-Type: application/json
 
 {
     "izena" : "Ingelesa",
-    "gela" : 2002-01-01
+    "gela" : "2025-01-01"
+}
+
+### DELETE moduluak delete
+DELETE  {{url}}/api/moduluak/2
+Accept: application/json
+Content-Type: application/json
+
+### GET ikasleak index
+GET {{url}}/api/ikasleak
+Authorization: Bearer 7|vusj8EelhluXvPhcxe6I86QA3Ik6sM5pFcAmSk8N2cb9c0c1
+
+### POST user moduluan erregistratu
+POST {{url}}/api/ikaslemoduluak
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 10|QF9Z4MBks6zNZROOwujlnXGmg2Ofgbvpes9YFyPk491d7c72
+
+{
+    "modulua_id": 1
 }

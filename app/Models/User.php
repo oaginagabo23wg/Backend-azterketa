@@ -47,4 +47,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function moduluak()
+    {
+        return $this->belongsToMany(Moduluak::class, 'moduluak_user', 'user_id', 'modulua_id');
+    }
+
 }

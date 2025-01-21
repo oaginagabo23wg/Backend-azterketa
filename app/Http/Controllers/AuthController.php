@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -66,5 +67,17 @@ class AuthController extends Controller
     
         return response()->json(['message' => 'You are logged out.']);
     }    
+
+    public function ikasleak(){
+        $logged = Auth::user();
+        if ($logged->teacher === 1){
+            $ikasleak = User::where('teacher', 0)->get();
+            return response()->json([
+                'message' => 'ikasleen zerrenda',
+                'ikasleak' => $ikasleak
+            ]);
+        } 
+        return response()->json(['message' => 'Etzara irakaslea']);
+    }
 
 }

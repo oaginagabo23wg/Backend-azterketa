@@ -2,67 +2,76 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UpdateModuluakRequest;
-use App\Http\Requests\StoreModuluakRequest;
 use App\Models\Moduluak;
+use Illuminate\Http\Request;
 
 class ModuluakController extends Controller
 {
     public function index()
     {
-        //return Moduluak::all();
-        return Moduluak::latest()->get();
+        $moduluak = Moduluak::all();
+        return response()->json($moduluak);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreModuluakRequest $request)
+    public function show($id)
     {
-        $request->validate([
-            'izena' => 'required:max:255',
-            'gela' => 'required|date'
+        $moduluak = Moduluak::find($id);
+
+        if (!$moduluak) {
+            return response()->json(['message' => 'Modulua ez da aurkitu'], 404);
+        }
+
+        return response()->json($moduluak);
+    }
+
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'izena' => 'required|string|max:255',
+            'gela' => 'required|date',
         ]);
 
-        // var_dump($request->all());
+        $moduluak = Moduluak::create($validatedData);
 
-        Moduluak::create($request->all());
-        return ['message' => 'ondo'];
-
+        return response()->json([
+            'message' => 'Modulua ondo sortu da',
+            'moduluak' => $moduluak
+        ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Moduluak $modulua)
+    public function update(Request $request, $id)
     {
-        //return $modulua;
-        return ['modulua' => $modulua, 'user' => $modulua->user];
-    }
+        $moduluak = Moduluak::find($id);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateModuluakRequest $request, Moduluak $modulua)
-    {
-        $fields = $request->validate([
-            'title' => 'required:max:255',
-            'body' => 'required'
+        if (!$moduluak) {
+            return response()->json(['message' => 'Modulua ez da aurkitu'], 404);
+        }
+
+        $validatedData = $request->validate([
+            'izena' => 'required|string|max:255',
+            'gela' => 'required|date',
         ]);
 
-        $modulua->update($fields);
+        $moduluak->update($validatedData);
 
-        //return $modulua;
-        return ['modulua' => $modulua, 'user' => $modulua->user];
+        return response()->json([
+            'message' => 'Modulua aldatu da',
+            'moduluak' => $moduluak
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Moduluak $modulua)
+    public function destroy($id)
     {
-        $modulua->delete();
+        $moduluak = Moduluak::find($id);
 
-        return ['message' => 'The modulua was deleted'];
+        if (!$moduluak) {
+            return response()->json(['message' => 'Modulua ez da aurkitu'], 404);
+        }
+
+        $moduluak->delete();
+
+        return response()->json([
+            'message' => 'Modulua ezabatu da'
+        ]);
     }
 }
