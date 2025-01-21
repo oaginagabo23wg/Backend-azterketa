@@ -1,0 +1,56 @@
+### POST user register
+POST http://127.0.0.1:8000/api/register
+Accept: application/json
+Content-Type: application/json
+
+{
+    "name" : "Koxme",
+    "email" : "Koxme123@gmail.com",
+    "password" : "pasahitza",
+    "password_confirmation": "pasahitza",
+    "teacher" : 0
+}
+
+### POST user register
+POST http://127.0.0.1:8000/api/register
+Accept: application/json
+Content-Type: application/json
+
+{
+    "name" : "Oihan",
+    "email" : "Oihan@gmail.com",
+    "password" : "pasahitza123",
+    "password_confirmation": "pasahitza123",
+    "teacher" : 1
+
+}
+
+
+### POST user login
+POST http://127.0.0.1:8000/api/login
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email" : "Koxme123@gmail.com",
+    "password" : "pasahitza"
+}
+
+### POST user logout
+POST http://127.0.0.1:8000/api/logout
+Authorization: Bearer 9|nCybrfozjXYuS2d9sqQ5SJCHSOhsctvRsc0XcYaO90767b32
+Accept: application/json
+
+### GET moduluak index
+GET http://127.0.0.1:8000/api/moduluak
+
+### POST moduluak store
+POST http://127.0.0.1:8000/api/moduluak
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 10|TJdvG47xDZ3ce9hge5mdAcuHaMZ1k2I3CwecxUnt1ae0a89b
+
+{
+    "izena" : "Ingelesa",
+    "gela" : 2002-01-01
+}
